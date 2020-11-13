@@ -14,11 +14,13 @@ public class Hero : MonoBehaviour {
     public GameObject projectilePrefab;
     public float projectileSpeed = 40;
     public Weapon[] weapons;
+    
 
     [Header("Set Dynamically")]
     [SerializeField]
     public float _shieldLevel = 1;
-
+    
+    
     // This variable holds a reference to the last triggering GameObject
     private GameObject lastTriggerGo = null;
 

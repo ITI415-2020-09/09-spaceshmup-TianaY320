@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Projectile : MonoBehaviour {
 
@@ -11,6 +12,7 @@ public class Projectile : MonoBehaviour {
     public Rigidbody rigid;
     [SerializeField]
     private WeaponType _type;
+    public Text scoreGT;
 
     // This public property masks the field _type and takes action when it is set
     public WeaponType type
@@ -31,11 +33,35 @@ public class Projectile : MonoBehaviour {
         rigid = GetComponent<Rigidbody>();
     }
 
+    private void Start()
+    {
+        GameObject scoreGO = GameObject.Find("ScoreCounter");
+        scoreGT = scoreGO.GetComponent<Text>();
+        scoreGT.text = "0";
+    }
+
     private void Update()
     {
         if (bndCheck.offUp)
         {
             Destroy(gameObject);
+
+        }
+    }
+
+    void OnCollisionEnter(Collision coll)
+    {
+        GameObject collidedWith = coll.gameObject;
+        if (collidedWith.tag == "Enemy")
+        {
+            int score = int.Parse(scoreGT.text);
+            score += 10;
+            scoreGT.text = score.ToString();
+
+            if (score > HighScore.score)
+            {
+                HighScore.score = score;
+            }
         }
     }
 

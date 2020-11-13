@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Main : MonoBehaviour {
 
@@ -18,6 +19,16 @@ public class Main : MonoBehaviour {
     {
         WeaponType.blaster, WeaponType.blaster, WeaponType.spread, WeaponType.shield
     };
+
+    [Header("Set Dynamically")]
+    public Text scoreGT;
+
+    void Start()
+    {
+        GameObject scoreGO = GameObject.Find("ScoreCounter");
+        scoreGT = scoreGO.GetComponent<Text>();
+        scoreGT.text = "0";
+    }
 
     private BoundsCheck bndCheck;
 
